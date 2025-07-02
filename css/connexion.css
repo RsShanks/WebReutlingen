@@ -2,7 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 /*ENCADRE CONNEXION/INSCRIPTION*/
-
+body{
+    display: flex;
+    flex-direction: column;
+}
+.content{
+    flex-grow: 1;
+}
 .encadre
 {
     margin-top: 2%;

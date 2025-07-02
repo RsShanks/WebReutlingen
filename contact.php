@@ -16,6 +16,21 @@ require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 $today = date('Y-m-d');
 $date_min = date('1905-01-01');
 
+if (empty($_POST)) {
+    $_POST["prenom"] = "";
+    $_POST["nom"] = "";
+    $_POST["metier"] = "";
+    $_POST["sujet"] = "";
+    $_POST["email"] = "";
+    $_POST["genre"] = "";
+    $_POST["date_contact"] = "";
+    $_POST["date_naissance"] = "";
+    $_POST["Contenu"] = "";
+    $_POST["envoyer"] = "";
+}
+if (!isset($_POST["genre"])){
+    $_POST["genre"] = ""; 
+}
 $prenom = htmlentities($_POST['prenom']);
 $nom = htmlentities($_POST['nom']);
 $metier = htmlentities($_POST['metier']);
@@ -39,42 +54,42 @@ $erreurContenu = "";
 $erreurGenre = "";
 $nbr_erreur = 0;
 
-if (isset($envoyer)) {
-    if (empty($genre) || !isset($genre)) {
+if ($_POST['envoyer']=="Envoyer") {
+    if (empty($genre)) {
         $erreurGenre = '<pre class="erreurGenre" style="color:red;">Séléctionnez un genre</pre>';
         $nbr_erreur++;
     }
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    if (empty($email) || !isset($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erreurMail = '<pre class="erreurMail" style="color: red;">Entrez une adresse mail correct</pre>';
         $nbr_erreur++;
     }
-    if ((empty($prenom)) || (!isset($prenom)) || (!preg_match("/^[a-zA-ZÀ-ú\s]*$/", $prenom))) {
+    if ((empty($prenom)) || (!preg_match("/^[a-zA-ZÀ-ú\s]*$/", $prenom))) {
         $erreurPrenom = '<pre class="erreurPrenom" style="color: red;">Entrez un prénom correct</pre>';
         $nbr_erreur++;
     }
-    if (empty($nom) || !isset($nom) || (!preg_match("/^[a-zA-ZÀ-ú\s]*$/", $nom))) {
+    if (empty($nom) || (!preg_match("/^[a-zA-ZÀ-ú\s]*$/", $nom))) {
         $erreurNom = '<pre class="erreurNom" style="color: red;">Entrez un nom correct</pre>';
         $nbr_erreur++;
     }
-    if (empty($metier) || !isset($metier) || (!preg_match('/^[a-zA-ZÀ-ú\s]*$/', $metier))) {
+    if (empty($metier) || (!preg_match('/^[a-zA-ZÀ-ú\s]*$/', $metier))) {
         $erreurMetier = '<pre class="erreurMetier" style="color: red;">Entrez seulement des lettres</pre>';
         $nbr_erreur++;
     }
-    if (empty($sujet) || !isset($sujet) || (!preg_match('/./', $sujet))) {
+    if (empty($sujet) || (!preg_match('/./', $sujet))) {
         $erreurSujet = '<pre class="erreurSujet" style="color: red;">Ne pas mettre de caractère spécial</pre>';
         $nbr_erreur++;
     }
-    if (empty($date_naissance) || !isset($date_naissance) || $today <= $date_naissance || $date_naissance <= $date_min) {
+    if (empty($date_naissance) || $today <= $date_naissance || $date_naissance <= $date_min) {
         $erreurNaissance = '<pre class="erreurNaissance" style="color: red;">Séléctionnez une date correct</pre>';
         $nbr_erreur++;
     }
-    if (empty($date_contact) || !isset($date_contact) || $date_contact != $today) {
+    if (empty($date_contact) ||  $date_contact != $today) {
         $erreurContact = '<pre class="erreurContact" style="color: red;">Séléctionnez la date d\'aujourd\'hui</pre>';
         $nbr_erreur++;
     }
 
-    if (empty($contenu) || !isset($contenu) || (!preg_match('/./', $contenu))) {
+    if (empty($contenu) || (!preg_match('/./', $contenu))) {
         $erreurContenu = '<pre class="erreurContenu" style="color: red;">Entrez un message</pre>';
         $nbr_erreur++;
     }
@@ -116,6 +131,8 @@ if (isset($envoyer)) {
         } catch (Exception $e) {
             $succes = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
+    } else {
+        $succes = "";
     }
 }
 ?>

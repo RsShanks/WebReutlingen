@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['page_produit'] = $_GET['produit'];
 ?>
 
 <!DOCTYPE html>
