@@ -16,21 +16,22 @@ session_start();
 </head>
 
 <body>
-    <?php
-    include('php/header2.php');
-    ?>
+    <div id="content">
+        <?php
+        include('php/header2.php');
+        ?>
 
-    <?php
-    if ($_SESSION['connecte'] != 0) {
-        /*$servname="localhost";
-        $key_cryptage='la securite avant tout';//clé de cryptage
-        $pass=openssl_decrypt(base64_decode("QUpZdVg3QVh2NU5Va29ZdnhEeDNPQT09"),"AES-128-ECB",$key_cryptage);
-        $user=openssl_decrypt("5UfEC4F+32Kr6EtKpwtz8A==","AES-128-ECB",$key_cryptage);
+        <?php
+        if ($_SESSION['connecte'] != 0) {
+            /*$servname="localhost";
+            $key_cryptage='la securite avant tout';//clé de cryptage
+            $pass=openssl_decrypt(base64_decode("QUpZdVg3QVh2NU5Va29ZdnhEeDNPQT09"),"AES-128-ECB",$key_cryptage);
+            $user=openssl_decrypt("5UfEC4F+32Kr6EtKpwtz8A==","AES-128-ECB",$key_cryptage);
 
-        $bdd= new PDO("mysql:host=$servname;dbname=boulangerie",$user,$pass); //connexion base de données
-        $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);*/
+            $bdd= new PDO("mysql:host=$servname;dbname=boulangerie",$user,$pass); //connexion base de données
+            $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);*/
 
-    ?>
+        ?>
             <div class="info_client">
                 <h2> Vos informations personnelles :</h2>
                 <div class="info_json">
@@ -43,37 +44,29 @@ session_start();
                         </tr>
                         <tr>
                             <?php
-                            $recup_user = $bdd->prepare("SELECT * from user where mail LIKE '{$_SESSION['utilisateur']}' ;");
-                            $recup_user->execute();
-                            $users = $recup_user->fetch(PDO::FETCH_ASSOC);
-                            if ($recup_user->rowCount() > 0){
-                                echo '<td>' . $users["nom"] . '</td>';
-                                echo '<td>' . $users["prenom"] . '</td>';
-                                echo '<td>' . $users["date_naissance"] . '</td>';
-                                echo '<td>' . $users["mail"] . '</td>';
-                            }
-
-
+                                $recup_user = $bdd->prepare("SELECT * from user where mail LIKE '{$_SESSION['utilisateur']}' ;");
+                                $recup_user->execute();
+                                $users = $recup_user->fetch(PDO::FETCH_ASSOC);
+                                if ($recup_user->rowCount() > 0){
+                                    echo '<td>' . $users["nom"] . '</td>';
+                                    echo '<td>' . $users["prenom"] . '</td>';
+                                    echo '<td>' . $users["date_naissance"] . '</td>';
+                                    echo '<td>' . $users["mail"] . '</td>';
+                                }
                             ?>
                         </tr>
-
                     </table>
-
-                </div>
-                <?php
-                if ($_SESSION['connecte'] == 1) {
-                ?>
-                    <div class="histo_change">
-
-                        <div class="historique_commande">
-                            <h2>Mes précédentes commandes :</h2>
-                            <div class="precedente_commande">
-
-                                <?php
-
-                                $recup_commande = $bdd->prepare("SELECT nom,quantite from commande inner join produit on commande.code_produit=produit.code where id_user = {$users['id']} and payer=0 ;");
-                                $recup_commande->execute();
-                                $commande = $recup_commande->fetchAll(PDO::FETCH_ASSOC);
+                    <?php
+                        if ($_SESSION['connecte'] == 1) {
+                    ?>
+                        <div class="histo_change">
+                            <div class="historique_commande">
+                                <h2>Mes précédentes commandes :</h2>
+                                <div class="precedente_commande">
+                                    <?php
+                                        $recup_commande = $bdd->prepare("SELECT nom,quantite from commande inner join produit on commande.code_produit=produit.code where id_user = {$users['id']} and payer=0 ;");
+                                        $recup_commande->execute();
+                                        $commande = $recup_commande->fetchAll(PDO::FETCH_ASSOC);
 
                                 for($i=0;$i < $recup_commande->rowCount(); $i++){
                                     echo $commande[$i]['nom']." : ".$commande[$i]['quantite'];
@@ -141,7 +134,7 @@ session_start();
                             </div>
                         </div>
                     <?php
-                } elseif ($_SESSION['connecte'] == 2) {
+                        } elseif ($_SESSION['connecte'] == 2) {
                     ?>
                         <div class="salutation">Droits d'Administrateur</div>
                         <div class="envoyer_mail">
@@ -151,7 +144,6 @@ session_start();
                         </div>
                         <h3 class="jsp">Back Office</h3>
                         <div class="back_office">
-
                             <div class="flex_mettre">
                                 <div class="titre_BO">Veuillez sélectionner la catégorie à supprimer</div>
                                 <!-- include  -->
@@ -159,17 +151,15 @@ session_start();
                                     <select name="categorie_supp" id="categorie_supprimer">
                                         <option value="">Catégorie</option>
                                         <?php
-                                        for( $i=0;$i<$recup_categorie->rowCount();$i++){
-                                            echo '<option value="' . $categorie[$i]["reference"] . '">' . $categorie[$i]["cate"] . '</option>';
-                                        }
-
+                                            for( $i=0;$i<$recup_categorie->rowCount();$i++){
+                                                echo '<option value="' . $categorie[$i]["reference"] . '">' . $categorie[$i]["cate"] . '</option>';
+                                            }
                                         ?>
                                     </select>
                                     <input type="submit" id="submit_bo" class="notActive" value="Valider">
                                 </form>
                                 <div class="erreur_categorie"></div>
                             </div>
-
                             <div class="flex_mettre2">
                                 <div class="titre_produit">Veuillez sélectionner le produit à supprimer</div>
                                 <!-- include  -->
@@ -177,12 +167,12 @@ session_start();
                                     <select name="produit_supp" id="produit_supprimer">
                                         <option value="">Produit</option>
                                         <?php
-                                        $recup_produit2 = $bdd->prepare("SELECT reference,nom from produit ;");
-                                        $recup_produit2->execute();
-                                        $produit2 = $recup_produit2->fetchAll(PDO::FETCH_ASSOC);
-                                        for($j=0;$j<$recup_produit2->rowCount();$j++){
-                                            echo '<option value="' . $produit2[$j]["reference"] . '">' . $produit2[$j]["nom"] . '</option>';
-                                        }
+                                            $recup_produit2 = $bdd->prepare("SELECT reference,nom from produit ;");
+                                            $recup_produit2->execute();
+                                            $produit2 = $recup_produit2->fetchAll(PDO::FETCH_ASSOC);
+                                            for($j=0;$j<$recup_produit2->rowCount();$j++){
+                                                echo '<option value="' . $produit2[$j]["reference"] . '">' . $produit2[$j]["nom"] . '</option>';
+                                            }
                                         ?>
                                     </select>
                                     <input type="submit" id="submit_produit" class="notActive" value="Valider">
@@ -190,19 +180,16 @@ session_start();
                                 <div class="erreur_prod"></div>
                             </div>
                         </div>
-
-                    </div>
+                    <?php
+                        }
+                    ?>
+                </div>
             </div>
 
+
         <?php
-            echo '</div>';
-        }
+            }else{;
         ?>
-
-
-    <?php
-    } else {
-    ?>
         <div class="encadre">
             <div class="toggleInscr_Connex" id="toggleInscr_Connex">
                 <div class="form_connexion" id="form_connexion">
@@ -277,12 +264,11 @@ session_start();
             <div class="tab-link" id="div_inscription">Vous n'etes pas encore inscris ?<a href="#" id="inscription"> cliquez ici</a></div>
             <div class="tab-link2 notActive" id="div_connexion">Vous etes déjà inscris ?<a href="#" id="connexion"> cliquez ici</a></div>
         </div>
-        </div>
     <?php
     }
     ?>
 
-
+    </div>
     <?php
     include('php/footer.php');
     ?>

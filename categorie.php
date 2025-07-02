@@ -36,16 +36,6 @@ $_SESSION['page_produit'] = $_GET['produit'];
             }
             ?>
         </div>
-        <div class="citation">
-            <?php
-            if ($recup_categorie->rowCount() > 0){
-                echo $categorie['presentation'];
-            }
-            else{
-                echo 'Cette catégorie n\'existe pas ';
-            }
-            ?>
-        </div>
         <div class="lien_ancre">
             <a href="#produit">Commander maintenant !</a>
         </div>

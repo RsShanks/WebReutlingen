@@ -6,7 +6,6 @@ $user=openssl_decrypt("5UfEC4F+32Kr6EtKpwtz8A==","AES-128-ECB",$key_cryptage);
 
 $bdd= new PDO("mysql:host=$servname;dbname=boulangerie",$user,$pass); //connexion base de données
 $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
 ?>
 <div class="top"></div>
 
@@ -34,17 +33,7 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         <!-- les logo à droite-->
         <div class="reste">
             <div class="panier">
-                <a href="panier.php"><i class="fa-solid fa-basket-shopping icone"></i>
-                    <?php
-                    if (!empty($_SESSION['panier'])) {
-                        foreach ($_SESSION['panier'] as $tab_min) {
-                            $total_quantity = intval($total_quantity) + intval($tab_min['quantity']);
-                            $prix_total = floatval($prix_total) + (floatval($tab_min['prix']) * intval($tab_min['quantity']));
-                        }
-                        echo $total_quantity . ' produits achetés - ' . $prix_total . ' euros';
-                    }
-                    ?>
-                </a>
+                <a href="panier.php"><i class="fa-solid fa-basket-shopping icone"></i></a>
             </div>
             <div class="connexion">
                 <?php
