@@ -12,6 +12,7 @@
     $bdd->exec("CREATE DATABASE IF NOT EXISTS boulangerie");
     
     // Connexion avec DB
+
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Création table
@@ -37,6 +38,7 @@
                resolution_ecran VARCHAR(20),
                derniere_connexion DATETIME
                );";
+
            $bdd->exec($new_table);
 
            $new_table = "CREATE TABLE produit (
@@ -65,7 +67,6 @@
             FOREIGN KEY (id_user) REFERENCES user(id)
         )";
 
-        
         $bdd->exec($new_table);
 
             $link1="\'fa fa-wheat-awn\'";

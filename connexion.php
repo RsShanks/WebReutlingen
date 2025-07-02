@@ -74,9 +74,15 @@ session_start();
                                 }
                                 ?>
                             </div>
+<<<<<<< HEAD
                         </div>
                         <div class="right_part">
                             <button id="affiche_coord">Modifier mes coordonnées</button>
+=======
+                            <button id="affiche_coord">Modifier mes coordonnées</button>
+                        </div>
+                        <div class="right_part">
+>>>>>>> master
                             <div class="change_coord notActive">
 
                                         <!-- include  -->
@@ -113,9 +119,15 @@ session_start();
                                                 <label id="label" for="nom">Code client</label><input type="text" readonly="readonly" value="<?php echo $users["id"] ?>">
                                             </div>
                                             <div class="choice">
+<<<<<<< HEAD
                                                 <input type="reset" id="annuler"></input>
                                                 <input type="submit" id="valider"></input>
                                             </div>
+=======
+                                                <input type="submit" id="valider"></input>
+                                            </div>
+                                                <input type="reset" id="annuler"></input>
+>>>>>>> master
                                             <div class="resultat_change"></div>
                                         </form>
 
@@ -203,6 +215,10 @@ session_start();
                 </div>
                 <!-- include  -->
                 <form action="php/verif_inscription.php" method="post" id="form_inscription" class="notActive">
+<<<<<<< HEAD
+=======
+                    <input type="hidden" id="resolution_ecran" name="resolution_ecran" />
+>>>>>>> master
                     <div class="logo2">
                         <i class="fas fa-user"></i>
                         <div class="titre_inscription">Inscription</div>
