@@ -9,8 +9,9 @@ $sexe=htmlentities($_POST['sexe']);
 $naissance=htmlentities($_POST['naissance']);
 $adresse=htmlentities($_POST['adresse']);
 $metier=htmlentities($_POST['metier']);
-//encoder le mdp
+$resolution = isset($_POST['resolution_ecran']) ? $_POST['resolution_ecran'] : null;
 $mdp=MD5($password);
+
 
 $servname="localhost";
 $key_cryptage='la securite avant tout';//clé de cryptage
@@ -19,47 +20,44 @@ $user=openssl_decrypt("5UfEC4F+32Kr6EtKpwtz8A==","AES-128-ECB",$key_cryptage);
 
 $bdd= new PDO("mysql:host=$servname;dbname=boulangerie",$user,$pass); //connexion base de données
 $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-try{
-    $recup_user = $bdd->prepare("SELECT * from  user WHERE mail = '{$mail}' ;");
-    $recup_user->execute();
-    if( $recup_user->rowCount() > 0){
-        $response='Cette adresse mail est déjà utilisée ';
+try {
+    // Vérification de l'email déjà utilisé
+    $recup_user = $bdd->prepare("SELECT * FROM user WHERE mail = :mail");
+    $recup_user->execute(['mail' => $mail]);
+
+    if ($recup_user->rowCount() > 0) {
+        $response = 'Cette adresse mail est déjà utilisée';
     }
-    else if (empty($prenom) || !preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/', $prenom) || !preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/', $nom) ) {
-        $response = 'Le prénom, le nom et l adresse, ne doivent contenir que des caractères normaux sans caractères spéciaux.';
+    // Vérification prénom et nom
+    else if (empty($prenom) || !preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/', $prenom) || !preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/', $nom)) {
+        $response = 'Le prénom, le nom et l\'adresse ne doivent contenir que des lettres sans caractères spéciaux.';
+    }
+    // Vérification du mot de passe brut
+    else if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{9,}$/', $password)) {
+        $response = 'Le mot de passe doit contenir au moins 9 caractères, une lettre majuscule, une lettre minuscule et un chiffre.';
+    }
+    else {
 
-    }   
-    else{
-        $new = $bdd->prepare("INSERT INTO user (prenom, nom, mail, mot_de_passe, sexe, date_naissance, adresse, metier) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        // Insertion en base
+        $new = $bdd->prepare("INSERT INTO user (prenom, nom, mail, mot_de_passe, sexe, date_naissance, adresse, metier,resolution_ecran)
+                              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $new->execute([$prenom, $nom, $mail, $mdp, $sexe, $naissance, $adresse, $metier, $resolution]);
 
-        // Liez les valeurs aux paramètres de la requête
-        $new->bindParam(1, $prenom);
-        $new->bindParam(2, $nom);
-        $new->bindParam(3, $mail);
-        $new->bindParam(4, $mdp);
-        $new->bindParam(5, $sexe);
-        $new->bindParam(6, $naissance);
-        $new->bindParam(7, $adresse);
-        $new->bindParam(8, $metier);
-        
-        // Exécutez la requête préparée
-        $new->execute();
+        // Démarrer la session
+        $_SESSION['connecte'] = 1;
+        $_SESSION['nom'] = $nom . ' ' . $prenom;
+        $_SESSION['utilisateur'] = $mail;
 
-        $_SESSION['connecte']=1;
-        $_SESSION['nom']= $nom.' '.$prenom;
-        $_SESSION['utilisateur']=$mail;
+        // Récupération de l'ID nouvel utilisateur
+        $recup_user = $bdd->query("SELECT max(id) as id FROM user");
+        $users = $recup_user->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['id_user'] = $users['id'];
 
-        $recup_user = $bdd->prepare("SELECT max(id) as id from  user;");
-        $recup_user->execute();
-        $users=$recup_user->fetch(PDO::FETCH_ASSOC);
-
-        $_SESSION['id_user']=$users['id'];
-
-        $response="ok";
+        $response = "ok";
     }
 }
-catch(PDOException $e){
-    $response="ERREUR : ". $e->getMessage();
+catch (PDOException $e) {
+    $response = "ERREUR : " . $e->getMessage();
 }
+
 echo json_encode(['response' => $response]);
-?>

@@ -17,12 +17,24 @@ if(! isset($_SESSION['connecte'])){
     <title>Breaking Bread : Viennoiserie, Pâtisserie</title>
 </head>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 <body>
 
     <?php
     include('php/header.php');
     ?>
+<<<<<<< HEAD
 
+=======
+    <?php
+    if (isset($_SESSION['connecte']) && $_SESSION['connecte'] != 0) {
+        echo 'Welcome Mr/Mrs ' . $_SESSION['nom'] . '. You were last online on ' . $_SESSION['derniere_connexion'];
+    }
+?>
+>>>>>>> master
     <div class="rightpart">
         <section class="children">
             <div class="slider">

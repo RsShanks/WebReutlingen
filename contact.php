@@ -202,7 +202,9 @@ if ($_POST['envoyer']=="Envoyer") {
             </div>
 
             <input type="submit" value="Envoyer" name="envoyer" id="button-sbt">
-            <div><?php echo $succes; ?></div>
+            <div><?php if (isset($succes)){
+                    echo $succes;
+             } ?></div>
         </form>
     </div>
 
