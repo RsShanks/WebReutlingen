@@ -68,8 +68,13 @@ $("#mdp").on('keypress', function () {
 $(document).ready(function () {
     $('#form1').on('submit', function (e) {
 
+<<<<<<< HEAD
         e.preventDefault();
         var $this = $(this);
+=======
+        var $this = $(this);
+        e.preventDefault();
+>>>>>>> master
         $.ajax({
             type: $this.attr('method'),
             url: $this.attr('action'),
@@ -124,6 +129,10 @@ $(document).ready(function () {
     });
 })
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 $("#nom").on('click', function () {
     var valeur = $(this).val();
     if (valeur == '') {
@@ -247,7 +256,12 @@ $("#metier").on('keypress keyup keydown', function () {
 /*VERIFICATION COTE SERVEUR AJAX PHP INSCRIPTION */
 $(document).ready(function () {
     $('#form_inscription').on('submit', function (e) {
+<<<<<<< HEAD
 
+=======
+        // Remplir le champ caché avec la résolution de l'écran
+        $("#resolution_ecran").val(window.screen.width + "x" + window.screen.height);
+>>>>>>> master
         e.preventDefault();
         var $this = $(this);
         $.ajax({

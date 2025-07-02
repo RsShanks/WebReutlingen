@@ -8,10 +8,17 @@
     // Connexion sans DB pour créer la base
     $bdd = new PDO("mysql:host=$servname;charset=utf8", $user, $pass);
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+<<<<<<< HEAD
     $bdd->exec("CREATE DATABASE IF NOT EXISTS boulangerie");
     
     // Connexion avec DB
     $bdd = new PDO("mysql:host=$servname;dbname=boulangerie;charset=utf8", $user, $pass);
+=======
+    $bdd = new PDO("mysql:host=$servname;dbname=boulangerie;charset=utf8", $user, $pass);
+    $bdd->exec("CREATE DATABASE IF NOT EXISTS boulangerie");
+    
+    // Connexion avec DB
+>>>>>>> master
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Création table
@@ -33,7 +40,14 @@
                sexe VARCHAR(20),
                date_naissance DATE NOT NULL,
                adresse TEXT NOT NULL,
+<<<<<<< HEAD
                metier TEXT NOT NULL );";
+=======
+               metier TEXT NOT NULL,
+               resolution_ecran VARCHAR(20),
+               derniere_connexion DATETIME
+               );";
+>>>>>>> master
            $bdd->exec($new_table);
 
            $new_table = "CREATE TABLE produit (
@@ -61,6 +75,11 @@
             FOREIGN KEY (code_produit) REFERENCES produit(code),
             FOREIGN KEY (id_user) REFERENCES user(id)
         )";
+<<<<<<< HEAD
+=======
+
+        
+>>>>>>> master
         $bdd->exec($new_table);
 
             $link1="\'fa fa-wheat-awn\'";

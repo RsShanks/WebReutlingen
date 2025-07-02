@@ -105,4 +105,22 @@ $(document).ready(function () {
             }
         });
     })
+<<<<<<< HEAD
 })
+=======
+})
+
+$(document).ready(function () {
+    // Désactiver le bouton valider au début
+    $("#valider").prop("disabled", true);
+
+    // Activer/désactiver en fonction de la checkbox
+    $("#option1").change(function () {
+        if ($(this).is(":checked")) {
+            $("#valider").prop("disabled", false);
+        } else {
+            $("#valider").prop("disabled", true);
+        }
+    });
+});
+>>>>>>> master

@@ -57,6 +57,10 @@ session_start();
                         }
                         echo '</table>';
                     ?>
+<<<<<<< HEAD
+=======
+                    <input type="checkbox" id="option1" name="options" value="data protection"> I accept the data protection.
+>>>>>>> master
                     <div class="validation">
                         <button id="annuler">Annuler</button>
                         <button id="valider">Valider</button>
