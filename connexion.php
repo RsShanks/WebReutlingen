@@ -16,6 +16,7 @@ session_start();
 </head>
 
 <body>
+<<<<<<< HEAD
     <div id="content">
         <?php
         include('php/header2.php');
@@ -32,6 +33,23 @@ session_start();
             $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);*/
 
         ?>
+=======
+    <?php
+    include('php/header2.php');
+    ?>
+
+    <?php
+    if ($_SESSION['connecte'] != 0) {
+        /*$servname="localhost";
+        $key_cryptage='la securite avant tout';//clé de cryptage
+        $pass=openssl_decrypt(base64_decode("QUpZdVg3QVh2NU5Va29ZdnhEeDNPQT09"),"AES-128-ECB",$key_cryptage);
+        $user=openssl_decrypt("5UfEC4F+32Kr6EtKpwtz8A==","AES-128-ECB",$key_cryptage);
+
+        $bdd= new PDO("mysql:host=$servname;dbname=boulangerie",$user,$pass); //connexion base de données
+        $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);*/
+
+    ?>
+>>>>>>> mast
             <div class="info_client">
                 <h2> Vos informations personnelles :</h2>
                 <div class="info_json">
@@ -44,6 +62,7 @@ session_start();
                         </tr>
                         <tr>
                             <?php
+<<<<<<< HEAD
                                 $recup_user = $bdd->prepare("SELECT * from user where mail LIKE '{$_SESSION['utilisateur']}' ;");
                                 $recup_user->execute();
                                 $users = $recup_user->fetch(PDO::FETCH_ASSOC);
@@ -67,6 +86,39 @@ session_start();
                                         $recup_commande = $bdd->prepare("SELECT nom,quantite from commande inner join produit on commande.code_produit=produit.code where id_user = {$users['id']} and payer=0 ;");
                                         $recup_commande->execute();
                                         $commande = $recup_commande->fetchAll(PDO::FETCH_ASSOC);
+=======
+                            $recup_user = $bdd->prepare("SELECT * from user where mail LIKE '{$_SESSION['utilisateur']}' ;");
+                            $recup_user->execute();
+                            $users = $recup_user->fetch(PDO::FETCH_ASSOC);
+                            if ($recup_user->rowCount() > 0){
+                                echo '<td>' . $users["nom"] . '</td>';
+                                echo '<td>' . $users["prenom"] . '</td>';
+                                echo '<td>' . $users["date_naissance"] . '</td>';
+                                echo '<td>' . $users["mail"] . '</td>';
+                            }
+
+
+                            ?>
+                        </tr>
+
+                    </table>
+
+                </div>
+                <?php
+                if ($_SESSION['connecte'] == 1) {
+                ?>
+                    <div class="histo_change">
+
+                        <div class="historique_commande">
+                            <h2>Mes précédentes commandes :</h2>
+                            <div class="precedente_commande">
+
+                                <?php
+
+                                $recup_commande = $bdd->prepare("SELECT nom,quantite from commande inner join produit on commande.code_produit=produit.code where id_user = {$users['id']} and payer=0 ;");
+                                $recup_commande->execute();
+                                $commande = $recup_commande->fetchAll(PDO::FETCH_ASSOC);
+>>>>>>> mast
 
                                 for($i=0;$i < $recup_commande->rowCount(); $i++){
                                     echo $commande[$i]['nom']." : ".$commande[$i]['quantite'];
@@ -74,6 +126,7 @@ session_start();
                                 }
                                 ?>
                             </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
                         </div>
                         <div class="right_part">
@@ -83,6 +136,11 @@ session_start();
                         </div>
                         <div class="right_part">
 >>>>>>> master
+=======
+                            <button id="affiche_coord">Modifier mes coordonnées</button>
+                        </div>
+                        <div class="right_part">
+>>>>>>> mast
                             <div class="change_coord notActive">
 
                                         <!-- include  -->
@@ -120,6 +178,7 @@ session_start();
                                             </div>
                                             <div class="choice">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 <input type="reset" id="annuler"></input>
                                                 <input type="submit" id="valider"></input>
                                             </div>
@@ -129,12 +188,23 @@ session_start();
                                                 <input type="reset" id="annuler"></input>
 >>>>>>> master
                                             <div class="resultat_change"></div>
+=======
+                                                <input type="submit" id="valider"></input>
+                                            </div>
+                                                <input type="reset" id="annuler"></input>
+                                            <div class="resultat_change"></div>
+                            </div>
+>>>>>>> mast
                                         </form>
 
                             </div>
                         </div>
                     <?php
+<<<<<<< HEAD
                         } elseif ($_SESSION['connecte'] == 2) {
+=======
+                } elseif ($_SESSION['connecte'] == 2) {
+>>>>>>> mast
                     ?>
                         <div class="salutation">Droits d'Administrateur</div>
                         <div class="envoyer_mail">
@@ -144,6 +214,10 @@ session_start();
                         </div>
                         <h3 class="jsp">Back Office</h3>
                         <div class="back_office">
+<<<<<<< HEAD
+=======
+
+>>>>>>> mast
                             <div class="flex_mettre">
                                 <div class="titre_BO">Veuillez sélectionner la catégorie à supprimer</div>
                                 <!-- include  -->
@@ -151,15 +225,26 @@ session_start();
                                     <select name="categorie_supp" id="categorie_supprimer">
                                         <option value="">Catégorie</option>
                                         <?php
+<<<<<<< HEAD
                                             for( $i=0;$i<$recup_categorie->rowCount();$i++){
                                                 echo '<option value="' . $categorie[$i]["reference"] . '">' . $categorie[$i]["cate"] . '</option>';
                                             }
+=======
+                                        for( $i=0;$i<$recup_categorie->rowCount();$i++){
+                                            echo '<option value="' . $categorie[$i]["reference"] . '">' . $categorie[$i]["cate"] . '</option>';
+                                        }
+
+>>>>>>> mast
                                         ?>
                                     </select>
                                     <input type="submit" id="submit_bo" class="notActive" value="Valider">
                                 </form>
                                 <div class="erreur_categorie"></div>
                             </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> mast
                             <div class="flex_mettre2">
                                 <div class="titre_produit">Veuillez sélectionner le produit à supprimer</div>
                                 <!-- include  -->
@@ -167,12 +252,21 @@ session_start();
                                     <select name="produit_supp" id="produit_supprimer">
                                         <option value="">Produit</option>
                                         <?php
+<<<<<<< HEAD
                                             $recup_produit2 = $bdd->prepare("SELECT reference,nom from produit ;");
                                             $recup_produit2->execute();
                                             $produit2 = $recup_produit2->fetchAll(PDO::FETCH_ASSOC);
                                             for($j=0;$j<$recup_produit2->rowCount();$j++){
                                                 echo '<option value="' . $produit2[$j]["reference"] . '">' . $produit2[$j]["nom"] . '</option>';
                                             }
+=======
+                                        $recup_produit2 = $bdd->prepare("SELECT reference,nom from produit ;");
+                                        $recup_produit2->execute();
+                                        $produit2 = $recup_produit2->fetchAll(PDO::FETCH_ASSOC);
+                                        for($j=0;$j<$recup_produit2->rowCount();$j++){
+                                            echo '<option value="' . $produit2[$j]["reference"] . '">' . $produit2[$j]["nom"] . '</option>';
+                                        }
+>>>>>>> mast
                                         ?>
                                     </select>
                                     <input type="submit" id="submit_produit" class="notActive" value="Valider">
@@ -180,6 +274,7 @@ session_start();
                                 <div class="erreur_prod"></div>
                             </div>
                         </div>
+<<<<<<< HEAD
                     <?php
                         }
                     ?>
@@ -190,6 +285,21 @@ session_start();
         <?php
             }else{;
         ?>
+=======
+
+                    </div>
+            </div>
+
+        <?php
+            echo '</div>';
+        }
+        ?>
+
+
+    <?php
+    } else {
+    ?>
+>>>>>>> mast
         <div class="encadre">
             <div class="toggleInscr_Connex" id="toggleInscr_Connex">
                 <div class="form_connexion" id="form_connexion">
@@ -216,9 +326,13 @@ session_start();
                 <!-- include  -->
                 <form action="php/verif_inscription.php" method="post" id="form_inscription" class="notActive">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                     <input type="hidden" id="resolution_ecran" name="resolution_ecran" />
 >>>>>>> master
+=======
+                    <input type="hidden" id="resolution_ecran" name="resolution_ecran" />
+>>>>>>> mast
                     <div class="logo2">
                         <i class="fas fa-user"></i>
                         <div class="titre_inscription">Inscription</div>
@@ -251,8 +365,13 @@ session_start();
                             <label for="adresse">Adresse :</label>
                             <input type="text" name="adresse" id="adresse" placeholder="Adresse physique" size="16">
                         </div>
+<<<<<<< HEAD
                         <div class="metier">
                             <label for="metier">Metier :</label>
+=======
+                        <label for="metier">Metier :</label>
+                        <div class="metier">
+>>>>>>> mast
                             <input type="text" name="metier" placeholder="Profession" size="16" id="metier">
                         </div>
                     </div>
@@ -262,13 +381,24 @@ session_start();
             <div class="erreur" id="erreur"></div>
             <div class="erreur2" id="erreur2"></div>
             <div class="tab-link" id="div_inscription">Vous n'etes pas encore inscris ?<a href="#" id="inscription"> cliquez ici</a></div>
+<<<<<<< HEAD
             <div class="tab-link2 notActive" id="div_connexion">Vous etes déjà inscris ?<a href="#" id="connexion"> cliquez ici</a></div>
+=======
+            <div class="tab-link2 notActive" id="div_connexion">Vous etes déjà inscris ?<a href="#" id="connexion" style="color: white;"> cliquez ici</a></div>
+        </div>
+>>>>>>> mast
         </div>
     <?php
     }
     ?>
 
+<<<<<<< HEAD
     </div>
+=======
+
+
+<br><br><br><br><br><br><br><br>
+>>>>>>> mast
     <?php
     include('php/footer.php');
     ?>

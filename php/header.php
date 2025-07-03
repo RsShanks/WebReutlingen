@@ -59,7 +59,21 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         </div>
         <div class="righthead">
             <div class="panier">
+<<<<<<< HEAD
                 <a href="panier.php"><i class="fa-solid fa-basket-shopping icone"></i> PANIER</a>
+=======
+                <a href="panier.php"><i class="fa-solid fa-basket-shopping icone"></i> PANIER
+                    <?php
+                    
+                    if (!empty($_SESSION['panier'])) {
+                        foreach ($_SESSION['panier'] as $tab_min) {
+                            $total_quantity = intval($total_quantity) + intval($tab_min['quantity']);
+                            $prix_total = floatval($prix_total) + (floatval($tab_min['prix']) * intval($tab_min['quantity']));
+                        }
+                        echo ' : ' . $total_quantity . ' produits achetés - ' . $prix_total . ' euros';
+                    }
+                    ?></a>
+>>>>>>> mast
             </div>
             <div class="connexion">
                 <a href="connexion.php">
@@ -83,7 +97,10 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             <label for="menu-mobile" class="menu-mobile">Menu</label>
             <input type="checkbox" id="menu-mobile" role="button">
             <ul>
+<<<<<<< HEAD
                 <!--affiche la barre de nav du haut-->
+=======
+>>>>>>> mast
                 <li class="menu_categorie"><a href="index.php">ACCUEIL</a></li>
 
                 <?php
@@ -91,7 +108,14 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                 $recup_categorie = $bdd->prepare("SELECT link,cate,reference,icone from categorie;");
                 $recup_categorie->execute();
                 $categorie = $recup_categorie->fetchAll(PDO::FETCH_ASSOC);
+<<<<<<< HEAD
                 
+=======
+
+
+
+                //affiche la barre de nav du haut
+>>>>>>> mast
                 for( $i=0;$i<$recup_categorie->rowCount();$i++){
                     if($categorie[$i]['link'] != '' && $categorie[$i]['cate']!= ''){
                         echo '<li class="menu_categorie"><a href="' . $categorie[$i]["link"] . '">' . $categorie[$i]["cate"] . '</a>';

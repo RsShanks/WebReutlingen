@@ -69,12 +69,17 @@ $(document).ready(function () {
     $('#form1').on('submit', function (e) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         e.preventDefault();
         var $this = $(this);
 =======
         var $this = $(this);
         e.preventDefault();
 >>>>>>> master
+=======
+        var $this = $(this);
+        e.preventDefault();
+>>>>>>> mast
         $.ajax({
             type: $this.attr('method'),
             url: $this.attr('action'),
@@ -130,9 +135,13 @@ $(document).ready(function () {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> master
+=======
+
+>>>>>>> mast
 $("#nom").on('click', function () {
     var valeur = $(this).val();
     if (valeur == '') {
@@ -257,11 +266,16 @@ $("#metier").on('keypress keyup keydown', function () {
 $(document).ready(function () {
     $('#form_inscription').on('submit', function (e) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         // Remplir le champ caché avec la résolution de l'écran
         $("#resolution_ecran").val(window.screen.width + "x" + window.screen.height);
 >>>>>>> master
+=======
+        // Remplir le champ caché avec la résolution de l'écran
+        $("#resolution_ecran").val(window.screen.width + "x" + window.screen.height);
+>>>>>>> mast
         e.preventDefault();
         var $this = $(this);
         $.ajax({

@@ -106,8 +106,11 @@ $(document).ready(function () {
         });
     })
 <<<<<<< HEAD
+<<<<<<< HEAD
 })
 =======
+=======
+>>>>>>> mast
 })
 
 $(document).ready(function () {
@@ -122,5 +125,9 @@ $(document).ready(function () {
             $("#valider").prop("disabled", true);
         }
     });
+<<<<<<< HEAD
 });
 >>>>>>> master
+=======
+});
+>>>>>>> mast

@@ -1,6 +1,10 @@
 <?php
 //fait
 session_start();
+<<<<<<< HEAD
+=======
+$_SESSION['page_produit'] = $_GET['produit'];
+>>>>>>> mast
 ?>
 <!DOCTYPE html>
 <html lang="fr">

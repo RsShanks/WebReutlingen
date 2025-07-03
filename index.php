@@ -18,14 +18,19 @@ if(! isset($_SESSION['connecte'])){
 </head>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> master
+=======
+
+>>>>>>> mast
 <body>
 
     <?php
     include('php/header.php');
     ?>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -35,6 +40,8 @@ if(! isset($_SESSION['connecte'])){
     }
 ?>
 >>>>>>> master
+=======
+>>>>>>> mast
     <div class="rightpart">
         <section class="children">
             <div class="slider">
@@ -70,13 +77,27 @@ if(! isset($_SESSION['connecte'])){
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </div>
                 <div class="precedent3">
+<<<<<<< HEAD
+=======
+                    </div>
+>>>>>>> mast
                     <i class="fa-solid fa-arrow-left-long"></i>
                 </div>
                 <div class="best-seller">NOS BEST-SELLERS !</div>
             </div>
         </section>
     </div>
+<<<<<<< HEAD
     </div>
+=======
+    <h1>
+        <?php
+    if (isset($_SESSION['connecte']) && $_SESSION['connecte'] == 1) {
+    echo 'Welcome Mr/Mrs ' . $_SESSION['nom'] . '. You were last online on ' . $_SESSION['derniere_connexion'];
+    }
+    ?>
+    </h1>
+>>>>>>> mast
     <?php
     include('php/footer.php');
     ?>

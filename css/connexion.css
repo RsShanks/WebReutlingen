@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 /*ENCADRE CONNEXION/INSCRIPTION*/
+<<<<<<< HEAD
 body{
     display: flex;
     flex-direction: column;
@@ -9,6 +10,9 @@ body{
 .content{
     flex-grow: 1;
 }
+=======
+
+>>>>>>> mast
 .encadre
 {
     margin-top: 2%;
@@ -102,8 +106,13 @@ body{
 
 .tab-link2
 {
+<<<<<<< HEAD
     color: #53301c;
     font-size: small;
+=======
+    font-size: small;
+    color: white;
+>>>>>>> mast
     position: absolute;
     bottom: 16%;
 }

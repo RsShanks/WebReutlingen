@@ -9,7 +9,11 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#envoyer").click(function (e) {
         e.preventDefault();
+<<<<<<< HEAD
 
+=======
+        window.location.href = 'thanks.php';
+>>>>>>> mast
         $.ajax({
             type: "GET",
             url: "php/set_payer.php",
@@ -23,6 +27,7 @@ $(document).ready(function () {
                         type: "GET",
                         url: "php/envoyerMail.php",
                         dataType: "json",
+<<<<<<< HEAD
                         success: function (response1) {
                          console.log("Réponse de envoyerMail.php :", response1);
                             if (response1.statu == 'ok') {
@@ -32,6 +37,9 @@ $(document).ready(function () {
                                 console.log(response1.statu);
                             }
                         }
+=======
+                        
+>>>>>>> mast
                     });
                     //
                 }

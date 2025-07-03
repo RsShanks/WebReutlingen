@@ -26,12 +26,17 @@ function envoyer_mail($mail_a_envoyer, $nom_client){
 
     $mail->SMTPSecure =  'TLS';               //Protocole de sécurisation des échanges avec le SMTPÖ
 <<<<<<< HEAD
+<<<<<<< HEAD
     $mail->Username   =  'boulangerie_CYTECH@laposte.net';   //Adresse email à utiliser
     $mail->Password   =  'password95CYTECH@';         //Mot de passe de l'adresse email à utiliser
 =======
     $mail->Username   =  'rs2shanks@gmail.com';   //Adresse email à utiliser
     $mail->Password   =  'Leseddiki2)';         //Mot de passe de l'adresse email à utiliser
 >>>>>>> master
+=======
+    $mail->Username   =  'rs2shanks@gmail.com';   //Adresse email à utiliser
+    $mail->Password   =  'Leseddiki2)';         //Mot de passe de l'adresse email à utiliser
+>>>>>>> mast
     $mail->setFrom('boulangerie_CYTECH@laposte.net','Breaking Bread');
 
     $mail->CharSet = 'UTF-8';
